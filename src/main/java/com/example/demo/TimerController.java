@@ -3,13 +3,9 @@ package com.example.demo;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 /**
@@ -18,7 +14,7 @@ import java.util.ResourceBundle;
  * @author Tobias Chisi
  */
 
-public class HelloController {
+public class TimerController {
 
     @FXML
     private Text currentTime;
@@ -46,6 +42,14 @@ public class HelloController {
     }
 
 
+    @FXML
+    protected void onResetButtonClick() {
+        timer.reset();
+        currentTime.setText(timer.getCurrentTime());
+        timeline.stop();
+        startButton.setDisable(false);
+        timer.isRunning = false;
+    }
     /**
      * Event handler for the "Stop" button click.
      * Stops the timer and enables the "Start" button.

@@ -1,6 +1,37 @@
-.button{
+BorderPane {
+    -fx-background-color: #080f26;
+    -fx-padding: 0 10 20 10; /* top - right - bottom - left */
+}
+
+/* Need to make this transparent in order to
+see the background set by .chart-content*/
+.bar-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+/* This is the actual background */
+.chart-content{
+    -fx-background-radius: 20px;
+    -fx-background-insets: 0;
+    -fx-background-color: #0c1536;
+}
+
+
+#button{
 
     -fx-background-color: #00ff00;
     -fx-text-fill: #000000;
+    -fx-font-size: 20px;
 
+}
+
+#timer{
+    -fx-fill: #0fcb28;
+    -fx-font-size:100px;
+}
+
+HBox{
+    -fx-alignment: BOTTOM_CENTER;
+    -fx-spacing: 10px;
+    -fx-arc-height: 20px;
 }

@@ -3,8 +3,6 @@ package com.example.demo;
 public class Timer {
 
     boolean isRunning = false;
-    boolean isPaused = false;
-    boolean isStopped = false;
     private int hours;
     private int minutes;
     private int seconds;
@@ -26,5 +24,11 @@ public class Timer {
         if(hours == 24){
             hours = 0;
         }
+    }
+
+    void reset() {
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
     }
 }
