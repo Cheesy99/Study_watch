@@ -8,14 +8,14 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo.HelloController">
+      fx:controller="com.example.demo.HelloController" stylesheets="@style.css">
   <Text fx:id="currentTime" layoutX="61.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
     <font>
       <Font size="38.0" />
     </font>
   </Text>
 
-  <Button fx:id="startButton" text="Start" onAction="#onStartButtonClick"/>
-  <Button fx:id="stopButton" text="Stop" onAction="#onStopButtonClick"/>
+  <Button id="button" fx:id="startButton" text="Start" onAction="#onStartButtonClick"/>
+  <Button id="button" fx:id="stopButton" text="Stop" onAction="#onStopButtonClick"/>
 
 </VBox>
