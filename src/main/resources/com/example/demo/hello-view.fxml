@@ -13,29 +13,29 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.BarChart?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.demo.TimerController" stylesheets="@style.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.demo.Controller" stylesheets="@style.css">
     <top>
         <VBox alignment="CENTER">
             <Text id="timer" fx:id="currentTime" text="00:00:00"/>
         </VBox>
     </top>
-  <center>
-      <BarChart id="BarChart" fx:id="barChart" >
-          <xAxis>
-              <CategoryAxis fx:id="xAxis" label="Time"/> <!-- Customize the X-axis label -->
-          </xAxis>
-          <yAxis>
-              <NumberAxis  fx:id="yAxis" label="Hours Studied"/> <!-- Customize the Y-axis label -->
-          </yAxis>
-      </BarChart>
-  </center>
+    <center>
+        <BarChart id="BarChart" fx:id="barChart">
+            <xAxis>
+                <CategoryAxis fx:id="xAxis" label="Time"/> <!-- Customize the X-axis label -->
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" label="Minutes Studied"/> <!-- Customize the Y-axis label -->
+            </yAxis>
+        </BarChart>
+    </center>
 
-  <bottom>
-    <HBox>
-        <Button id="button" fx:id="startButton" text="Start" onAction="#onStartButtonClick"/>
-        <Button id="button" fx:id="stopButton" text="Stop" onAction="#onStopButtonClick"/>
-        <Button id="button" fx:id="resetButton" text="Reset" onAction="#onResetButtonClick"/>
-    </HBox>
-  </bottom>
+    <bottom>
+        <HBox>
+            <Button id="button" fx:id="startButton" text="Start" onAction="#onStartButtonClick"/>
+            <Button id="button" fx:id="stopButton" text="Stop" onAction="#onStopButtonClick"/>
+            <Button id="button" fx:id="resetButton" text="Reset" onAction="#onResetButtonClick"/>
+        </HBox>
+    </bottom>
 
 </BorderPane>
