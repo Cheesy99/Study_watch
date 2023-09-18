@@ -34,8 +34,6 @@ public class Controller implements Initializable {
     @FXML
     private BarChart<String, Double> barChart;
 
-    @FXML
-    private NumberAxis yAxis;
 
     //private BarChartController barChartController;
 
@@ -101,11 +99,8 @@ public class Controller implements Initializable {
 
     private void updateBarHeights(Double minutesStudied, int hour) {
         XYChart.Series<String, Double> series = barChart.getData().get(0);
-        for (XYChart.Data<String, Double> data : series.getData()) {
-            Double currentMinutes = data.getYValue();
-            Double newMinutes = currentMinutes + minutesStudied;
-            data.setYValue(newMinutes);
-        }
+        series.getData().get(hour - 5)
+                .setYValue(series.getData().get(hour - 5).getYValue() + minutesStudied);
     }
 
 
