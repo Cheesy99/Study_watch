@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 
@@ -31,7 +32,7 @@ public class Controller implements Initializable {
     private Timer timer = new Timer();
     private Timeline timeline;
     @FXML
-    private BarChart<String, Integer> barChart;
+    private BarChart<String, Double> barChart;
 
     @FXML
     private NumberAxis yAxis;
@@ -89,48 +90,83 @@ public class Controller implements Initializable {
         return new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             timer.runSeconds();
             currentTime.setText(timer.getCurrentTime());
+            LocalTime startTime = LocalTime.of(5, 0); // 05:00
+            LocalTime endTime = LocalTime.of(23, 0); // 23:00
+            LocalTime currentTime = LocalTime.now();
+            if(currentTime.isAfter(startTime) && currentTime.isBefore(endTime)) {
+                updateBarHeights(0.016666666666666666666666666666666666666, currentTime.getHour());
+            }
         }));
     }
 
+    private void updateBarHeights(Double minutesStudied, int hour) {
+        XYChart.Series<String, Double> series = barChart.getData().get(0);
+        for (XYChart.Data<String, Double> data : series.getData()) {
+            Double currentMinutes = data.getYValue();
+            Double newMinutes = currentMinutes + minutesStudied;
+            data.setYValue(newMinutes);
+        }
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Customize the Y-axis (NumberAxis)
+        // Setting up the bar chart with the axes and starter data
         barChart.setTitle("Daily Study Hours");
         barChart.setLegendVisible(false);
-        XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("05:00", 4));
-        series.getData().add(new XYChart.Data<>("06:00", 10));
-        series.getData().add(new XYChart.Data<>("07:00", 15));
-        series.getData().add(new XYChart.Data<>("08:00", 10));
-        series.getData().add(new XYChart.Data<>("09:00", 10));
-        series.getData().add(new XYChart.Data<>("10:00", 10));
-        series.getData().add(new XYChart.Data<>("11:00", 10));
-        series.getData().add(new XYChart.Data<>("12:00", 10));
-        series.getData().add(new XYChart.Data<>("13:00", 60));
-        series.getData().add(new XYChart.Data<>("14:00", 10));
-        series.getData().add(new XYChart.Data<>("15:00", 11));
-        series.getData().add(new XYChart.Data<>("16:00", 12));
-        series.getData().add(new XYChart.Data<>("17:00", 13));
-        series.getData().add(new XYChart.Data<>("18:00", 14));
-        series.getData().add(new XYChart.Data<>("19:00", 10));
-        series.getData().add(new XYChart.Data<>("20:00", 10));
-        series.getData().add(new XYChart.Data<>("21:00", 10));
-        series.getData().add(new XYChart.Data<>("22:00", 10));
-        series.getData().add(new XYChart.Data<>("23:00", 10));
-        series.getData().add(new XYChart.Data<>("00:00", 10));
+        //Optimization ideas: String[] times = {"05:00", "06:00", "07:00", "08:00", "09:00", "10:00",
+        XYChart.Series<String, Double> series = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<>("05:00", 0.0)); //0
+        series.getData().add(new XYChart.Data<>("06:00", 0.0)); //1
+        series.getData().add(new XYChart.Data<>("07:00", 0.0)); //2
+        series.getData().add(new XYChart.Data<>("08:00", 0.0)); //3
+        series.getData().add(new XYChart.Data<>("09:00", 0.0)); //4
+        series.getData().add(new XYChart.Data<>("10:00", 0.0)); //5
+        series.getData().add(new XYChart.Data<>("11:00", 0.0)); //6
+        series.getData().add(new XYChart.Data<>("12:00", 0.0)); //7
+        series.getData().add(new XYChart.Data<>("13:00", 0.0)); //8
+        series.getData().add(new XYChart.Data<>("14:00", 0.0)); //9
+        series.getData().add(new XYChart.Data<>("15:00", 0.0)); //10
+        series.getData().add(new XYChart.Data<>("16:00", 0.0)); //11
+        series.getData().add(new XYChart.Data<>("17:00", 0.0)); //12
+        series.getData().add(new XYChart.Data<>("18:00", 0.0)); //13
+        series.getData().add(new XYChart.Data<>("19:00", 0.0)); //14
+        series.getData().add(new XYChart.Data<>("20:00", 0.0)); //15
+        series.getData().add(new XYChart.Data<>("21:00", 0.0)); //16
+        series.getData().add(new XYChart.Data<>("22:00", 0.0)); //17
+        series.getData().add(new XYChart.Data<>("23:00", 0.0)); //18
+        series.getData().add(new XYChart.Data<>("00:00", 55.0)); //19
         barChart.getData().add(series);
 
-        yAxis = new NumberAxis(0, 60, 10); // Lower bound: 0, Upper bound: 60, Tick unit: 10
-
         // Set the custom Y-axis to the bar chart
+        // Styling Bar Chart
+        XYChart.Series<String, Double> style = barChart.getData().get(0); // These are the bars
+        barChart.setAnimated(false); // Disable animations (optional)
         barChart.setVerticalGridLinesVisible(false); // Hide vertical grid lines (optional)
-        barChart.setVerticalZeroLineVisible(false); // Hide the zero line (optional)
-       // Adjust the gap between tick labels and axis
+        style.getData().get(0).getNode().setStyle("-fx-bar-fill: #c7d95b"); // Red
+        style.getData().get(1).getNode().setStyle("-fx-bar-fill: #c9e707");
+        style.getData().get(2).getNode().setStyle("-fx-bar-fill: #94e04c");
+        style.getData().get(3).getNode().setStyle("-fx-bar-fill: #94fd2f");
+        style.getData().get(4).getNode().setStyle("-fx-bar-fill: #61dc40");
+        style.getData().get(5).getNode().setStyle("-fx-bar-fill: #27e34d");
+        style.getData().get(6).getNode().setStyle("-fx-bar-fill: #27e3b1");
+        style.getData().get(7).getNode().setStyle("-fx-bar-fill: #27dde3");
+        style.getData().get(8).getNode().setStyle("-fx-bar-fill: #2795e3");
+        style.getData().get(9).getNode().setStyle("-fx-bar-fill: #2746e3");
+        style.getData().get(10).getNode().setStyle("-fx-bar-fill: #8d56e1");
+        style.getData().get(11).getNode().setStyle("-fx-bar-fill: #670df1");
+        style.getData().get(12).getNode().setStyle("-fx-bar-fill: #b00df1");
+        style.getData().get(13).getNode().setStyle("-fx-bar-fill: #f10dd3");
+        style.getData().get(14).getNode().setStyle("-fx-bar-fill: #f10d74");
+        style.getData().get(15).getNode().setStyle("-fx-bar-fill: #f10d4a");
+        style.getData().get(16).getNode().setStyle("-fx-bar-fill: #ec0606");
+        style.getData().get(17).getNode().setStyle("-fx-bar-fill: #da4c2d");
+        style.getData().get(18).getNode().setStyle("-fx-bar-fill: #da8f2d");
+        // made the last bar transparent as I could find out how to keep the scale of the graph constant
+        style.getData().get(19).getNode().setStyle("-fx-bar-fill: rgba(0, 0, 255, 0.0)");
 
 
-
-
-
+        System.out.println(LocalTime.now().getHour());
 
     }
 }
