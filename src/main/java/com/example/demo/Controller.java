@@ -4,12 +4,18 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -42,11 +48,9 @@ public class Controller implements Initializable {
      * Starts the timer and updates the UI.
      */
 
-
+    //TODO: should go into a separate class it should extend the button class
     @FXML
     protected void onStartButtonClick() {
-      //  barChartController = new BarChartController(barChart);
-       // barChartController.initialize();
         if (!timer.isRunning) {
             timeline = createTimeline();
             timeline.setCycleCount(Timeline.INDEFINITE);
@@ -58,6 +62,7 @@ public class Controller implements Initializable {
             throw new IllegalStateException("Implementation error at onStartButtonClick()");
     }
 
+    //TODO: should go into a separate class it should extend the button class
 
     @FXML
     protected void onResetButtonClick() {
@@ -72,6 +77,7 @@ public class Controller implements Initializable {
      * Stops the timer and enables the "Start" button.
      */
 
+    //TODO: should go into a separate class it should extend the button class
     @FXML
     protected void onStopButtonClick() {
         timeline.stop();
@@ -96,14 +102,14 @@ public class Controller implements Initializable {
             }
         }));
     }
-
+        //TODO: This method should go into bars class
     private void updateBarHeights(Double minutesStudied, int hour) {
         XYChart.Series<String, Double> series = barChart.getData().get(0);
         series.getData().get(hour - 5)
                 .setYValue(series.getData().get(hour - 5).getYValue() + minutesStudied);
     }
 
-
+    //TODO:  Make a separate class for the bars this method should be in it and shortened if possible
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Setting up the bar chart with the axes and starter data
@@ -164,4 +170,4 @@ public class Controller implements Initializable {
         System.out.println(LocalTime.now().getHour());
 
     }
-}
+  }
