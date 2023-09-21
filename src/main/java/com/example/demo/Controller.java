@@ -39,6 +39,7 @@ public class Controller implements Initializable {
     private Timeline timeline;
     @FXML
     private BarChart<String, Double> barChart;
+    private Bars bars = new Bars();
 
 
     //private BarChartController barChartController;
@@ -116,28 +117,7 @@ public class Controller implements Initializable {
         barChart.setTitle("Daily Study Hours");
         barChart.setLegendVisible(false);
         //Optimization ideas: String[] times = {"05:00", "06:00", "07:00", "08:00", "09:00", "10:00",
-        XYChart.Series<String, Double> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("05:00", 0.0)); //0
-        series.getData().add(new XYChart.Data<>("06:00", 0.0)); //1
-        series.getData().add(new XYChart.Data<>("07:00", 0.0)); //2
-        series.getData().add(new XYChart.Data<>("08:00", 0.0)); //3
-        series.getData().add(new XYChart.Data<>("09:00", 0.0)); //4
-        series.getData().add(new XYChart.Data<>("10:00", 0.0)); //5
-        series.getData().add(new XYChart.Data<>("11:00", 0.0)); //6
-        series.getData().add(new XYChart.Data<>("12:00", 0.0)); //7
-        series.getData().add(new XYChart.Data<>("13:00", 0.0)); //8
-        series.getData().add(new XYChart.Data<>("14:00", 0.0)); //9
-        series.getData().add(new XYChart.Data<>("15:00", 0.0)); //10
-        series.getData().add(new XYChart.Data<>("16:00", 0.0)); //11
-        series.getData().add(new XYChart.Data<>("17:00", 0.0)); //12
-        series.getData().add(new XYChart.Data<>("18:00", 0.0)); //13
-        series.getData().add(new XYChart.Data<>("19:00", 0.0)); //14
-        series.getData().add(new XYChart.Data<>("20:00", 0.0)); //15
-        series.getData().add(new XYChart.Data<>("21:00", 0.0)); //16
-        series.getData().add(new XYChart.Data<>("22:00", 0.0)); //17
-        series.getData().add(new XYChart.Data<>("23:00", 0.0)); //18
-        series.getData().add(new XYChart.Data<>("00:00", 55.0)); //19
-        barChart.getData().add(series);
+        barChart.getData().add(bars.getSeries());
 
         // Set the custom Y-axis to the bar chart
         // Styling Bar Chart
