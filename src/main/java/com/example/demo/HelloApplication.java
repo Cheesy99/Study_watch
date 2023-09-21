@@ -12,8 +12,6 @@ import java.util.Objects;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("pictures/clock.png")));
-        stage.getIcons().add(icon);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 700);
         stage.setTitle("Timer");
