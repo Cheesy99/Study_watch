@@ -4,18 +4,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -39,7 +31,7 @@ public class Controller implements Initializable {
     private Timeline timeline;
     @FXML
     private BarChart<String, Double> barChart;
-    private Bars bars = new Bars();
+    private Bars bars = new Bars(barChart);
 
 
     //private BarChartController barChartController;
@@ -99,16 +91,11 @@ public class Controller implements Initializable {
             LocalTime endTime = LocalTime.of(23, 0); // 23:00
             LocalTime currentTime = LocalTime.now();
             if(currentTime.isAfter(startTime) && currentTime.isBefore(endTime)) {
-                updateBarHeights(0.016666666666666666666666666666666666666, currentTime.getHour());
+                bars.updateBarHeights(currentTime.getHour());
             }
         }));
     }
-        //TODO: This method should go into bars class
-    private void updateBarHeights(Double minutesStudied, int hour) {
-        XYChart.Series<String, Double> series = barChart.getData().get(0);
-        series.getData().get(hour - 5)
-                .setYValue(series.getData().get(hour - 5).getYValue() + minutesStudied);
-    }
+
 
     //TODO:  Make a separate class for the bars this method should be in it and shortened if possible
     @Override
