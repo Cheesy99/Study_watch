@@ -30,7 +30,7 @@
     </center>
 
     <bottom>
-
+        <Button id="button" fx:id="nextButton" text="Next" onAction="#onNextButtonClick"/>
     </bottom>
 
 </BorderPane>
